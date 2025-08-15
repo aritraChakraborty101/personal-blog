@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import { useEffect, useState } from 'react'
 import { supabase } from '../../supabaseClient'
+import type { AuthChangeEvent, Session } from '@supabase/supabase-js'
 import Auth from './Auth'
 
 interface ProtectedRouteProps {
@@ -21,7 +22,7 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
     checkAuth()
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (_event, session) => {
+      (_event: AuthChangeEvent, session: Session | null) => {
         setIsAuthenticated(!!session)
       }
     )
