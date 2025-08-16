@@ -6,7 +6,7 @@ import { supabase } from '../supabaseClient'
 import type { UserRole } from '../hooks/useUserRole'
 import Sidebar from '../components/Sidebar'
 import Navbar from '../components/Navbar'
-import Footer from '../components/Footer' // If you created this
+import Footer from '../components/Footer'
 
 interface LayoutProps {
   children: ReactNode
@@ -24,32 +24,34 @@ export default function Layout({ children, session, userRole }: LayoutProps) {
   }
 
   return (
-    <div className="flex h-screen bg-gray-50">
-      {/* Sidebar */}
-      <Sidebar 
-        sidebarOpen={sidebarOpen} 
-        setSidebarOpen={setSidebarOpen} 
-        session={session}
-        userRole={userRole}
-      />
-
-      {/* Main Content */}
-      <div className="flex-1 flex flex-col overflow-hidden">
-        <Navbar 
+    <div className="flex flex-col min-h-screen bg-gray-50">
+      <div className="flex flex-1 overflow-hidden">
+        {/* Sidebar */}
+        <Sidebar 
           sidebarOpen={sidebarOpen} 
           setSidebarOpen={setSidebarOpen} 
           session={session}
           userRole={userRole}
-          handleSignOut={handleSignOut}
         />
 
-        {/* Main Content */}
-        <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-50 p-6">
-          {children}
-        </main>
+        {/* Main Content Container */}
+        <div className="flex flex-col flex-1 w-full overflow-hidden">
+          <Navbar 
+            sidebarOpen={sidebarOpen} 
+            setSidebarOpen={setSidebarOpen} 
+            session={session}
+            userRole={userRole}
+            handleSignOut={handleSignOut}
+          />
 
-        {/* Footer */}
-        {/* Add your Footer component here if you have one */}
+          {/* Main Content */}
+          <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-50 p-4 md:p-6">
+            {children}
+          </main>
+
+          {/* Footer */}
+          <Footer />
+        </div>
       </div>
     </div>
   )

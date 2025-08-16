@@ -9,7 +9,7 @@ interface SidebarProps {
   userRole: UserRole
 }
 
-export default function Sidebar({ sidebarOpen, setSidebarOpen, session, userRole }: SidebarProps) {
+export default function Sidebar({ sidebarOpen, setSidebarOpen, userRole }: SidebarProps) {
   return (
     <>
       {/* Mobile sidebar backdrop */}
