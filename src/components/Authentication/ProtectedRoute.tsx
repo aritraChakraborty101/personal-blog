@@ -1,8 +1,8 @@
 import type { ReactNode } from 'react'
 import { useEffect, useState } from 'react'
+import { Navigate } from 'react-router-dom'
 import { supabase } from '../../supabaseClient'
 import type { AuthChangeEvent, Session } from '@supabase/supabase-js'
-import Auth from './Auth'
 
 interface ProtectedRouteProps {
   children: ReactNode
@@ -39,7 +39,7 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
   }
 
   if (!isAuthenticated) {
-    return <Auth />
+    return <Navigate to="/login" replace />
   }
 
   return <>{children}</>

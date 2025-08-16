@@ -1,29 +1,14 @@
-import { useState, useEffect } from 'react'
-import './App.css'
-import { supabase } from './supabaseClient'
-import type { Session, AuthChangeEvent } from '@supabase/supabase-js'
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom'
 import Auth from './components/Authentication/Auth'
+import Layout from './layout/MainLayout'
+import Dashboard from './components/Dashboard'
+import ProtectedRoute from './components/Authentication/ProtectedRoute'
+import { useAuthSession } from './hooks/useAuthSession'
+import AdminDashboard from "./components/AdminDashboard"// Create this component
 
 function App() {
-  const [session, setSession] = useState<Session | null>(null)
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    // Check for active session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session)
-      setLoading(false)
-    })
-
-    // Listen for auth changes
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event: AuthChangeEvent, session: Session | null) => {
-      setSession(session)
-    })
-
-    return () => subscription.unsubscribe()
-  }, [])
+  const { session, loading, userRole } = useAuthSession()
+  const baseUrl = import.meta.env.BASE_URL || '/personal-blog'
 
   if (loading) {
     return (
@@ -33,26 +18,42 @@ function App() {
     )
   }
 
+  console.log('Current user role:', userRole)
+
   return (
-    <div className="container mx-auto px-4 py-8">
-      {!session ? (
-        <Auth />
-      ) : (
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <h1 className="text-3xl font-bold mb-4">Welcome to Your Blog</h1>
-          <p className="text-lg text-gray-700 mb-6">
-            You are logged in as {session.user.email}
-          </p>
-          
-          <button
-            className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
-            onClick={() => supabase.auth.signOut()}
-          >
-            Sign Out
-          </button>
-        </div>
-      )}
-    </div>
+    <Router basename={baseUrl}>
+      <Routes>
+        <Route
+          path="/login"
+          element={
+            session
+              ? <Navigate to="/" replace />
+              : <Auth />
+          }
+        />
+        <Route
+          path="/*"
+          element={
+            session ? (
+              <ProtectedRoute>
+                <Layout session={session} userRole={userRole}>
+                  <Routes>
+                    <Route path="/" element={<Dashboard session={session} userRole={userRole} />} />
+                    
+                    {/* Admin-only route */}
+                    {userRole === 'admin' && (
+                      <Route path="/admin" element={<AdminDashboard session={session} />} />
+                    )}
+                  </Routes>
+                </Layout>
+              </ProtectedRoute>
+            ) : (
+              <Auth />
+            )
+          }
+        />
+      </Routes>
+    </Router>
   )
 }
 
