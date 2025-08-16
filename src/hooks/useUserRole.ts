@@ -28,7 +28,7 @@ export function useUserRole(session: Session | null) {
         if (error) {
           console.error('Error fetching user role:', error)
           
-          // If no profile exists, create one with default role
+          // If no profile exists, create one with default 'user' role
           if (error.code === 'PGRST116') { // Record not found
             console.log('Creating profile for user', session.user.id)
             
@@ -36,13 +36,13 @@ export function useUserRole(session: Session | null) {
               await supabase.from('profiles').insert({
                 id: session.user.id,
                 email: session.user.email,
-                role: 'user' // Default role
+                role: 'user' // Default role for new signups
               })
               
               setUserRole('user')
             } catch (insertError) {
               console.error('Error creating profile:', insertError)
-              setUserRole('user') // Default to user on error
+              setUserRole('user')
             }
           } else {
             setUserRole('user') // Default to user role on other errors
@@ -51,7 +51,7 @@ export function useUserRole(session: Session | null) {
           console.log('Found user role:', data.role)
           setUserRole(data.role as UserRole)
         } else {
-          setUserRole('user') // Default if no data returned
+          setUserRole('user')
         }
       } catch (error) {
         console.error('Unexpected error fetching role:', error)

@@ -39,25 +39,30 @@ export default function Navbar({
             </button>
             
             {/* Logo */}
-            <Link to="/" className="flex items-center">
+            <Link to="/dashboard" className="flex items-center">
               <span className="text-gray-800 font-bold text-xl">Aritra's Blog</span>
             </Link>
           </div>
 
           {/* Right side navigation - Desktop */}
           <div className="hidden md:flex items-center ml-4 md:ml-6">
-            <Link to="/" className="text-gray-600 hover:text-gray-800 px-3 py-2 rounded-md text-sm font-medium">
+            <Link to="/dashboard" className="text-gray-600 hover:text-gray-800 px-3 py-2 rounded-md text-sm font-medium">
               Dashboard
             </Link>
             <Link to="/blog" className="text-gray-600 hover:text-gray-800 px-3 py-2 rounded-md text-sm font-medium">
-              Blog
+              Public Blog
             </Link>
             
             {/* Admin-only links */}
             {userRole === 'admin' && (
-              <Link to="/admin" className="text-gray-600 hover:text-gray-800 px-3 py-2 rounded-md text-sm font-medium">
-                Admin
-              </Link>
+              <>
+                <Link to="/dashboard/manage-posts" className="text-gray-600 hover:text-gray-800 px-3 py-2 rounded-md text-sm font-medium">
+                  Manage Posts
+                </Link>
+                <Link to="/dashboard/create-post" className="text-gray-600 hover:text-gray-800 px-3 py-2 rounded-md text-sm font-medium">
+                  Create Post
+                </Link>
+              </>
             )}
             
             {/* Profile section */}
@@ -124,7 +129,7 @@ export default function Navbar({
             
             <div className="space-y-1">
               <Link
-                to="/"
+                to="/dashboard"
                 className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-100"
                 onClick={() => setDropdownOpen(false)}
               >
@@ -135,18 +140,27 @@ export default function Navbar({
                 className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-100"
                 onClick={() => setDropdownOpen(false)}
               >
-                Blog
+                Public Blog
               </Link>
               
               {/* Admin-only links */}
               {userRole === 'admin' && (
-                <Link
-                  to="/admin"
-                  className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-100"
-                  onClick={() => setDropdownOpen(false)}
-                >
-                  Admin
-                </Link>
+                <>
+                  <Link
+                    to="/dashboard/manage-posts"
+                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-100"
+                    onClick={() => setDropdownOpen(false)}
+                  >
+                    Manage Posts
+                  </Link>
+                  <Link
+                    to="/dashboard/create-post"
+                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-100"
+                    onClick={() => setDropdownOpen(false)}
+                  >
+                    Create Post
+                  </Link>
+                </>
               )}
               
               <button
