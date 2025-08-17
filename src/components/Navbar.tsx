@@ -46,16 +46,19 @@ export default function Navbar({
 
           {/* Right side navigation - Desktop */}
           <div className="hidden md:flex items-center ml-4 md:ml-6">
-            <Link to="/dashboard" className="text-gray-600 hover:text-gray-800 px-3 py-2 rounded-md text-sm font-medium">
-              Dashboard
-            </Link>
+
             <Link to="/blog" className="text-gray-600 hover:text-gray-800 px-3 py-2 rounded-md text-sm font-medium">
               Public Blog
             </Link>
-            
-            {/* Admin-only links */}
             {userRole === 'admin' && (
               <>
+                <Link to="/dashboard" className="text-gray-600 hover:text-gray-800 px-3 py-2 rounded-md text-sm font-medium">
+                  Dashboard
+                </Link>
+              
+              
+              {/* Admin-only links */}
+              
                 <Link to="/dashboard/manage-posts" className="text-gray-600 hover:text-gray-800 px-3 py-2 rounded-md text-sm font-medium">
                   Manage Posts
                 </Link>

@@ -53,9 +53,9 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen, userRole }: Sideb
         <div className="absolute inset-0 bg-gray-600 opacity-75"></div>
       </div>
 
-      {/* Sidebar */}
+      {/* Sidebar - Updated with smooth shadow instead of border */}
       <div
-        className={`fixed inset-y-0 left-0 z-30 w-64 transition duration-300 transform bg-white border-r md:translate-x-0 md:static md:h-screen ${
+        className={`fixed inset-y-0 left-0 z-30 w-64 transition duration-300 transform bg-white shadow-lg md:translate-x-0 md:static md:h-screen md:shadow-sm ${
           sidebarOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'
         }`}
       >
@@ -68,23 +68,27 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen, userRole }: Sideb
         <nav className="mt-10 px-4">
           <div className="space-y-1">
             {/* Main Navigation */}
-            <Link
-              to="/dashboard"
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded-md"
-              onClick={() => setSidebarOpen(false)}
-            >
-              <span className="flex items-center">
-                <svg className="mr-3 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5a2 2 0 012-2h4a2 2 0 012 2v6H8V5z" />
-                </svg>
-                Dashboard
-              </span>
-            </Link>
+            {userRole === 'admin' && (
+              <>
+                <Link
+                  to="/dashboard"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded-md transition-colors"
+                  onClick={() => setSidebarOpen(false)}
+                >
+                  <span className="flex items-center">
+                    <svg className="mr-3 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5a2 2 0 012-2h4a2 2 0 012 2v6H8V5z" />
+                    </svg>
+                    Dashboard
+                  </span>
+                </Link>
+              </>
+            )}
 
             <Link
               to="/blog"
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded-md"
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded-md transition-colors"
               onClick={() => setSidebarOpen(false)}
             >
               <span className="flex items-center">
@@ -106,7 +110,7 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen, userRole }: Sideb
                 
                 <Link
                   to="/dashboard/admin"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded-md"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded-md transition-colors"
                   onClick={() => setSidebarOpen(false)}
                 >
                   <span className="flex items-center">
@@ -119,7 +123,7 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen, userRole }: Sideb
                 
                 <Link
                   to="/dashboard/create-post"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded-md"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded-md transition-colors"
                   onClick={() => setSidebarOpen(false)}
                 >
                   <span className="flex items-center">
@@ -132,7 +136,7 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen, userRole }: Sideb
                 
                 <Link
                   to="/dashboard/manage-posts"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded-md"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded-md transition-colors"
                   onClick={() => setSidebarOpen(false)}
                 >
                   <span className="flex items-center">
@@ -157,7 +161,7 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen, userRole }: Sideb
                   <Link
                     key={category.id}
                     to={`/blog?category=${category.slug}`}
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded-md"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded-md transition-colors"
                     onClick={() => setSidebarOpen(false)}
                   >
                     <span className="flex items-center">
@@ -184,7 +188,7 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen, userRole }: Sideb
             <div className="mt-2 space-y-1">
               <a
                 href="mailto:aritra.chakraborty@g.bracu.ac.bd"
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded-md"
+                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded-md transition-colors"
               >
                 <span className="flex items-center">
                   <svg className="mr-3 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -198,7 +202,7 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen, userRole }: Sideb
                 href="https://github.com/yourusername"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded-md"
+                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded-md transition-colors"
               >
                 <span className="flex items-center">
                   <svg className="mr-3 h-4 w-4" fill="currentColor" viewBox="0 0 24 24">

@@ -44,7 +44,7 @@ function App() {
         <Route
           path="/login"
           element={
-            session ? <Navigate to="/dashboard" replace /> : <Auth />
+            session ? <Navigate to="/blog" replace /> : <Auth />
           }
         />
 
