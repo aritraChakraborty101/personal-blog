@@ -13,7 +13,6 @@ import PostManagement from './components/admin/PostManagement'
 
 function App() {
   const { session, loading, userRole } = useAuthSession()
-  const baseUrl = import.meta.env.BASE_URL || '/personal-blog'
 
   if (loading) {
     return (
@@ -24,7 +23,7 @@ function App() {
   }
 
   return (
-    <Router basename={baseUrl}>
+    <Router basename="/personal-blog">
       <Routes>
         {/* Public routes - accessible to everyone */}
         <Route path="/blog" element={
@@ -33,7 +32,6 @@ function App() {
           </PublicLayout>
         } />
         
-        {/* Updated to use slug instead of id */}
         <Route path="/blog/:slug" element={
           <PublicLayout>
             <BlogPost userRole={userRole} session={session} />
@@ -76,10 +74,11 @@ function App() {
           }
         />
 
-        {/* Root redirect */}
-        <Route path="/" element={
-          session ? <Navigate to="/dashboard" replace /> : <Navigate to="/blog" replace />
-        } />
+        {/* Root redirect - Updated to handle GitHub Pages */}
+        <Route path="/" element={<Navigate to="/blog" replace />} />
+        
+        {/* Catch all route for 404s */}
+        <Route path="*" element={<Navigate to="/blog" replace />} />
       </Routes>
     </Router>
   )
