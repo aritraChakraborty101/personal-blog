@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom'
+import { HashRouter as Router, Route, Routes, Navigate } from 'react-router-dom'
 import Auth from './components/Authentication/Auth'
 import Layout from './layout/MainLayout'
 import PublicLayout from './layout/PublicLayout'
@@ -23,7 +23,7 @@ function App() {
   }
 
   return (
-    <Router basename="/personal-blog">
+    <Router>
       <Routes>
         {/* Public routes - accessible to everyone */}
         <Route path="/blog" element={
@@ -74,7 +74,7 @@ function App() {
           }
         />
 
-        {/* Root redirect - Updated to handle GitHub Pages */}
+        {/* Root redirect */}
         <Route path="/" element={<Navigate to="/blog" replace />} />
         
         {/* Catch all route for 404s */}
