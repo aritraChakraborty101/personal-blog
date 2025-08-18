@@ -42,6 +42,7 @@ jobs:
         env:
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
           VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+          VITE_TINYMCE_API_KEY: ${{ secrets.VITE_TINYMCE_API_KEY }}
       - name: Setup Pages
         uses: actions/configure-pages@v5 # Updated to v5, as it's the latest
       - name: Upload artifact
