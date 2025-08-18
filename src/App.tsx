@@ -10,6 +10,7 @@ import { useAuthSession } from './hooks/useAuthSession'
 import AdminDashboard from './components/AdminDashboard'
 import PostEditor from './components/admin/PostEditor'
 import PostManagement from './components/admin/PostManagement'
+// import TinyMCEEditor from './components/admin/TinyMCEEditor'
 
 function App() {
   const { session, loading, userRole } = useAuthSession()
@@ -63,6 +64,9 @@ function App() {
                         <Route path="/create-post" element={<PostEditor />} />
                         <Route path="/edit-post/:id" element={<PostEditor />} />
                         <Route path="/manage-posts" element={<PostManagement />} />
+                        {/* <Route path="/edit-post/:id" element={<TinyMCEEditor />} />
+                        <Route path="/create-post" element={<TinyMCEEditor />} /> */}
+
                       </>
                     )}
                   </Routes>

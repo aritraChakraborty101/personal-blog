@@ -12,6 +12,7 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.55.0",
     "@tailwindcss/vite": "^4.1.12",
+    "@tinymce/tinymce-react": "^6.3.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.8.1",
@@ -19,6 +20,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.33.0",
+    "@types/quill": "^2.0.14",
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",
     "@vitejs/plugin-react-swc": "^4.0.0",
