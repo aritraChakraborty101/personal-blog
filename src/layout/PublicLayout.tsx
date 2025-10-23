@@ -49,7 +49,7 @@ export default function PublicLayout({ children }: PublicLayoutProps) {
                 Contact Me
               </a>
               <a
-                href="https://github.com/yourusername"
+                href="https://github.com/aritraChakraborty101"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-600 hover:text-gray-800 text-sm"
